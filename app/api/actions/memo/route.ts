@@ -283,7 +283,6 @@
 
 
 
-
 import {
     ActionPostResponse,
     ACTIONS_CORS_HEADERS,
@@ -311,10 +310,12 @@ import {
       links: {
         actions: [
           {
+            type: "post", // Added required type property
             label: "Send Sol💵",
             href: req.url,
           },
           {
+            type: "post", // Added required type property
             label: "Send Bonk✌️",
             href: "https://solana.com/developers",
           },
@@ -379,9 +380,9 @@ import {
         headers: ACTIONS_CORS_HEADERS,
       });
     } catch (err) {
-      console.error(err);
+      console.error('Transaction failed:', err);
       const message =
-        typeof err === "string" ? err : "An error occurred while sending the memo";
+        err instanceof Error ? err.message : "Failed to process memo transaction";
       return new Response(message, {
         status: 500,
         headers: ACTIONS_CORS_HEADERS,
