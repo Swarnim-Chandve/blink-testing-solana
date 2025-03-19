@@ -281,8 +281,6 @@
 
 
 
-
-
 import {
     ActionPostResponse,
     ACTIONS_CORS_HEADERS,
@@ -310,12 +308,12 @@ import {
       links: {
         actions: [
           {
-            type: "post", // Added required type property
+            type: "post",
             label: "Send Sol💵",
             href: req.url,
           },
           {
-            type: "post", // Added required type property
+            type: "post",
             label: "Send Bonk✌️",
             href: "https://solana.com/developers",
           },
@@ -368,11 +366,12 @@ import {
       const { blockhash } = await connection.getLatestBlockhash();
       transaction.recentBlockhash = blockhash;
   
-      // Create the response payload
+      // Create the response payload with required type
       const payload: ActionPostResponse = await createPostResponse({
         fields: {
           transaction,
           message: "Post this memo",
+          type: "TRANSACTION", // Added required type property
         },
       });
   
